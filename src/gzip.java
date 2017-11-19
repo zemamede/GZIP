@@ -2,7 +2,7 @@
 Teoria da Informa��o, LEI, 2006/2007*/
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.Arrays;
 
 //class principal para leitura de um ficheiro gzip
 //M�todos:
@@ -18,27 +18,111 @@ public class gzip
 	static long origFileSize;
 	static int numBlocks = 0;
 	static RandomAccessFile is;
-	static int rb = 0, needBits = 0, availBits = 0;
+	static int rb = 0, availBits = 0;
 
-	public int[] orderCodeLength(int[] codeLength, int HCLEN){
+
+	public void calcHuffmanInsertTree (HuffmanTree tree, int[] arrayOriginal, int[] nextCode, int size){
+		int[] codeF = new int[size];
+		String string;
+		for (int i=0;i<size;i++){
+
+			if(arrayOriginal[i]!=0){
+				codeF[i] = nextCode[arrayOriginal[i]-1];
+				string = bits2String((byte)codeF[i]);
+				System.out.printf(""+string);
+				tree.addNode(string,i,false);
+				nextCode[arrayOriginal[i]-1]++;
+				System.out.println("Bits a inserir:"+codeF[i]+" Nr bits do codigo"+arrayOriginal[i]+" == "+string);
+			}
+		}
+	}
+
+	public int[] eachBitStartCode(int[] b1Count){
+		int []nextCode = new int[b1Count.length+10];
+		int code = 0;
+		b1Count[0] = 0;
+		for(int i=1;i<b1Count.length;i++){
+			code = (code + b1Count[i-1])<<1;
+			nextCode[i] = code;
+		}
+		System.out.println(Arrays.toString(nextCode));
+		return  nextCode;
+	}
+
+	public int[] countNumberCodes(int[]arrayNoZeros){
+		int [] extremos;
+		int max;
+		Arrays.sort(arrayNoZeros);
+		extremos = minMaxLength(arrayNoZeros);
+		max = extremos[1];
+		int [] b1Count = new int[max];
+		int counter = 0;
+		for(int i=0;i<max;i++){
+
+			for(int j=0;j<arrayNoZeros.length;j++){
+				if(arrayNoZeros[j]==i+1){
+					counter ++;
+				}else{
+					continue;
+				}
+			}
+			b1Count[i] = counter;
+			counter = 0;
+		}
+		System.out.println(Arrays.toString(b1Count));
+		return b1Count;
+	}
+
+	public int[] minMaxLength(int[]array){
+		int[] extremos = new int[2];
+		//min
+		extremos[0] = array[0];
+		//max
+		extremos[1] = array[array.length-1];
+		return extremos;
+	}
+
+	public int[] removeZerosFromArray(int []array){
+		int numZeros = countZerosFromArray(array);
+		int[] result = new int[array.length-numZeros];
+		int j=0;
+		for(int i=0;i<array.length;i++){
+			if(array[i]!=0){
+				result[j] = array[i];
+				j++;
+			}
+		}
+		return  result;
+	}
+
+	public int countZerosFromArray(int[] array){
+		int count = 0;
+		for(int i=0;i<array.length;i++){
+			if(array[i]==0){
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public int[] orderCodeLength(int[] array, int HCLEN){
         int[] orderedArray = {16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15};
         int[] result = new int[19];
         for(int i=0;i<result.length;i++){
             if(i<HCLEN+4) {
-                result[orderedArray[i]] = codeLength[i];
+                result[orderedArray[i]] = array[i];
             }
             else{
                 result[orderedArray[i]]=0;
             }
         }
-        codeLength = result;
-        return codeLength;
+        array = result;
+        return array;
     }
 
 	public int readBits(int neededBits) throws IOException {
 		int result;
 		int m = (int) Math.pow(2,neededBits)-1;
-        //System.out.println(m);
         while(availBits<neededBits){
 			this.rb = is.readUnsignedByte() << availBits | rb;
 			availBits += 8;
@@ -112,15 +196,22 @@ public class gzip
                 HDIST = gz.readBits(5);
                 System.out.println("HDIST = " + HDIST);
                 HCLEN = gz.readBits(4);
-
+				System.out.println("HCLEN = " + HCLEN);
                 int[] codeLength = new int[19];
+                int[] codeLengthNoZeros;
+                int[] b1Count;
+                int[] nextCode;
                 for(int i=0;i<HCLEN+4;i++){
                     codeLength[i]= gz.readBits(3);
                 }
+				HuffmanTree codeLengthtree = new HuffmanTree();
+
                 codeLength = gz.orderCodeLength(codeLength,HCLEN);
-                for(int i=0;i<19;i++)
-                    System.out.println(codeLength[i]);
-                HuffmanTree CodeLengthtree = new HuffmanTree();
+				codeLengthNoZeros = gz.removeZerosFromArray(codeLength);
+                b1Count = gz.countNumberCodes(codeLengthNoZeros);
+                nextCode = gz.eachBitStartCode(b1Count);
+
+				gz.calcHuffmanInsertTree(codeLengthtree,codeLength,nextCode,19);
 				//actualizar n�mero de blocos analisados
 				numBlocks++;				
 			}while(BFINAL == 0);
@@ -219,5 +310,18 @@ public class gzip
 			b >>= 1;
 		}
 		return strBits;		
+	}
+
+	public  static String bits2StringWithSize(byte b, int size){
+		String strBits = "";
+		byte mask = 0x01;  //get LSbit
+
+		for (byte bit, i = 1; i <= 8; i++)
+		{
+			bit = (byte)(b & mask);
+			strBits = bit + strBits; //add bit to the left, since LSb first
+			b >>= 1;
+		}
+		return strBits;
 	}
 }
