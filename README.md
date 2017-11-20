@@ -1,2 +1,3 @@
 # GZIPjava
-GZIP java version
+GZIP java with deflate, for dynamic huffman code
+
