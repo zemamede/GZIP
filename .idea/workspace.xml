@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3be208a-5e79-4ac9-aea0-4bc858f7b3c6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/HuffmanTree.java" afterPath="$PROJECT_DIR$/src/HuffmanTree.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gzip.java" afterPath="$PROJECT_DIR$/src/gzip.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -19,11 +17,12 @@
       <file leaf-file-name="gzip.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gzip.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="212" column="8" lean-forward="true" selection-start-line="212" selection-start-column="8" selection-end-line="212" selection-end-column="8" />
+            <state relative-caret-position="308">
+              <caret line="222" column="4" lean-forward="false" selection-start-line="222" selection-start-column="4" selection-end-line="222" selection-end-column="4" />
               <folding>
                 <element signature="n#!!doc;n#gzip#0" expanded="false" />
                 <element signature="method#literalsDistanceArray#0;class#gzip#0" expanded="false" />
+                <element signature="method#calcHuffmanInsertTree#0;class#gzip#0" expanded="false" />
                 <element signature="method#removeZerosFromArray#0;class#gzip#0" expanded="false" />
                 <element signature="method#countZerosFromArray#0;class#gzip#0" expanded="false" />
                 <element signature="method#orderCodeLength#0;class#gzip#0" expanded="false" />
@@ -284,12 +283,12 @@
       <option name="presentableId" value="Default" />
       <updated>1511112158630</updated>
       <workItem from="1511112160353" duration="2910000" />
-      <workItem from="1511116048115" duration="19422000" />
+      <workItem from="1511116048115" duration="19739000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22332000" />
+    <option name="totallyTimeSpent" value="22649000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="954" y="0" width="973" height="1057" extended-state="0" />
@@ -373,6 +372,7 @@
           <folding>
             <element signature="n#!!doc;n#gzip#0" expanded="false" />
             <element signature="method#literalsDistanceArray#0;class#gzip#0" expanded="false" />
+            <element signature="method#calcHuffmanInsertTree#0;class#gzip#0" expanded="false" />
             <element signature="method#removeZerosFromArray#0;class#gzip#0" expanded="false" />
             <element signature="method#countZerosFromArray#0;class#gzip#0" expanded="false" />
             <element signature="method#orderCodeLength#0;class#gzip#0" expanded="false" />
@@ -425,11 +425,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gzip.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="212" column="8" lean-forward="true" selection-start-line="212" selection-start-column="8" selection-end-line="212" selection-end-column="8" />
+        <state relative-caret-position="308">
+          <caret line="222" column="4" lean-forward="false" selection-start-line="222" selection-start-column="4" selection-end-line="222" selection-end-column="4" />
           <folding>
             <element signature="n#!!doc;n#gzip#0" expanded="false" />
             <element signature="method#literalsDistanceArray#0;class#gzip#0" expanded="false" />
+            <element signature="method#calcHuffmanInsertTree#0;class#gzip#0" expanded="false" />
             <element signature="method#removeZerosFromArray#0;class#gzip#0" expanded="false" />
             <element signature="method#countZerosFromArray#0;class#gzip#0" expanded="false" />
             <element signature="method#orderCodeLength#0;class#gzip#0" expanded="false" />

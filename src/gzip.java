@@ -200,31 +200,31 @@ public class gzip
                 System.out.println("HDIST = " + HDIST);
                 HCLEN = gz.readBits(4);
 				System.out.println("HCLEN = " + HCLEN);
-                int[] codeLength = new int[19];
-                int[] codeLengthNoZeros = new int[12];
-                int[] nextCode = new int[5];
-                for(int i=0;i<HCLEN+4;i++){
-                    codeLength[i]= gz.readBits(3);
-                }
+
 				HuffmanTree codeLengthTree = new HuffmanTree();
 				HuffmanTree literalTree = new HuffmanTree();
 				HuffmanTree distanceTree = new HuffmanTree();
+
 				/*1*/
+				int[] codeLength = new int[19];
+				for(int i=0;i<HCLEN+4;i++){
+					codeLength[i]= gz.readBits(3);
+				}
 				gz.huffmanFinal(codeLengthTree,codeLength,HCLEN,19);
 				System.out.println("\n\n#DONE n1#\n\n");
+
 				/*2*/
 				int[] literalLength = gz.literalsDistanceArray(codeLengthTree,HLIT+257);
 				gz.huffmanFinal(literalTree,literalLength,HLIT,HLIT+257);
 				System.out.println("\n\n#DONE n2#\n\n");
+
 				/*3*/
 				int[] distanceLength = gz.literalsDistanceArray(codeLengthTree,HDIST+1);
 				gz.huffmanFinal(distanceTree,distanceLength,HDIST,HDIST+1);
 				System.out.println("\n\n#DONE n3#\n\n");
 
 
-
-				//gz.huffmanFinal(distanceLength,distanceTree,HDIST,HDIST+1);
-				//actualizar n�mero de blocos analisados
+				//actualizar numero de blocos analisados
 				numBlocks++;				
 			}while(BFINAL == 0);
 						
