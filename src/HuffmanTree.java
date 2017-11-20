@@ -1,11 +1,11 @@
 /* Author: Rui Pedro Paiva
-Teoria da Informação, LEI, 2006/2007*/
+Teoria da Informaï¿½ï¿½o, LEI, 2006/2007*/
 
 
-//class para criação, gestão e acesso de árvores de Huffman
+//class para criaï¿½ï¿½o, gestï¿½o e acesso de ï¿½rvores de Huffman
 public class HuffmanTree
 {
-	HFNode root, curNode;  //raíz da árvore e nó actual na travessia
+	HFNode root, curNode;  //raï¿½z da ï¿½rvore e nï¿½ actual na travessia
 		
 
 	//construtor	
@@ -22,16 +22,16 @@ public class HuffmanTree
 	}
 	
 
-	//reposicionar nó corrente na raíz
+	//reposicionar nï¿½ corrente na raï¿½z
 	public void resetCurNode ()
 	{
 		curNode = root;
 	}
 	
 	
-	//adiciona nó à árvore 
-	//recebe string com o código (representado por String com 0s e 1s) e o índice no alfabeto
-	//devolve -1 se o nó já existe; -2 se o código deixar de ser de prefixo; 0 se adicionou bem
+	//adiciona nï¿½ ï¿½ ï¿½rvore 
+	//recebe string com o cï¿½digo (representado por String com 0s e 1s) e o ï¿½ndice no alfabeto
+	//devolve -1 se o nï¿½ jï¿½ existe; -2 se o cï¿½digo deixar de ser de prefixo; 0 se adicionou bem
 	public int addNode(String s, int ind, boolean verbose)
 	{
 		HFNode tmp = root;
@@ -42,7 +42,7 @@ public class HuffmanTree
 					
 		while(lv < len && !found)
 		{			
-			if (tmp.index != -1)  //tentando criar filho de folha --> deixaria de ser código de prefixo...
+			if (tmp.index != -1)  //tentando criar filho de folha --> deixaria de ser cï¿½digo de prefixo...
 			{
 				pos = -2;
 				found = true;
@@ -57,17 +57,17 @@ public class HuffmanTree
 					{					
 						tmp = tmp.left;
 					}
-					else if (tmp.left != null) // nó já inserido
+					else if (tmp.left != null) // nï¿½ jï¿½ inserido
 					{
 						pos = -1;
 						found = true;
 					}
-					/*else if (tmp.index != -1)  //tentando criar filho de folha --> deixaria de ser código de prefixo...
+					/*else if (tmp.index != -1)  //tentando criar filho de folha --> deixaria de ser cï¿½digo de prefixo...
 					{
 						pos = -2;
 						found = true;
 					}*/
-					else //cria nó à esquerda
+					else //cria nï¿½ ï¿½ esquerda
 					{
 						if (lv == len-1)  //folha						
 							index = ind;
@@ -85,7 +85,7 @@ public class HuffmanTree
 					{					
 						tmp = tmp.right;
 					}
-					else if (tmp.right != null) // nó já inserido
+					else if (tmp.right != null) // nï¿½ jï¿½ inserido
 					{
 						  pos = -1;
 						  found = true;
@@ -95,7 +95,7 @@ public class HuffmanTree
 						pos = -2;
 						found = true;	
 					}*/
-					else //cria nó à direita
+					else //cria nï¿½ ï¿½ direita
 					{
 						if (lv == len-1)  //folha
 							index = ind;
@@ -118,19 +118,19 @@ public class HuffmanTree
 		if (verbose)
 		{
 			if (pos == -1)
-				System.out.println("Código '" + s + "' já inserido!!!");
+				System.out.println("Codigo '" + s + "' ja inserido!!!");
 			else if (pos == -2)
-				System.out.println("Código '" + s + ": tentando extender folha!!!");
+				System.out.println("Codigo '" + s + ": tentando extender folha!!!");
 			else
-				System.out.println("Código '" + s + "' inserido com sucesso");
+				System.out.println("Codigo '" + s + "' inserido com sucesso com o valor "+ind);
 		}
 		
 		return pos;
 	}				
-		
+
 	
-	//procura código na árvore, a partir do nó actual (representado por String com 0s e 1s
-	//devolve -1 se não encontrou; -2 se é prefixo de código existente; índice no alfabeto se encontrou
+	//procura cï¿½digo na ï¿½rvore, a partir do nï¿½ actual (representado por String com 0s e 1s
+	//devolve -1 se nï¿½o encontrou; -2 se ï¿½ prefixo de cï¿½digo existente; ï¿½ndice no alfabeto se encontrou
 	public int findNode(String s, HFNode cur, boolean verbose)
 	{
 		HFNode tmp = cur;
@@ -170,24 +170,24 @@ public class HuffmanTree
 		if (verbose)
 		{
 			if (pos == -1)
-				System.out.println("Código '" + s + "' não encontrado!!!");
+				System.out.println("Cï¿½digo '" + s + "' nï¿½o encontrado!!!");
 			else if (pos == -2)
-				System.out.println("Código '" + s + "': não encontrado mas prefixo!!!");
+				System.out.println("Cï¿½digo '" + s + "': nï¿½o encontrado mas prefixo!!!");
 			else
-				System.out.println("Código '" + s + "' corresponde à posição " + pos + " do alfabeto");
+				System.out.println("Cï¿½digo '" + s + "' corresponde ï¿½ posiï¿½ï¿½o " + pos + " do alfabeto");
 		}
 						
 		return pos;
 	}	
 	
-	//procura código na árvore a partir da raíz (representado por String com 0s e 1s
+	//procura cï¿½digo na ï¿½rvore a partir da raï¿½z (representado por String com 0s e 1s
 	public int findNode(String s, boolean verbose)
 	{
 		return findNode(s, root, verbose);
 	}
 	
-	//actualiza nó corrente na árvore com base no nó actual e nó próximo bit
-	//devolve -1 se não encontrou o nó, -2 se encontrou mas não é folha, index se é folha
+	//actualiza nï¿½ corrente na ï¿½rvore com base no nï¿½ actual e nï¿½ prï¿½ximo bit
+	//devolve -1 se nï¿½o encontrou o nï¿½, -2 se encontrou mas nï¿½o ï¿½ folha, index se ï¿½ folha
 	public int nextNode(char c)
 	{
 		int pos;
@@ -227,9 +227,9 @@ public class HuffmanTree
 
 class HFNode
 {
-	int index = -1;  //se folha, guarda posição no alfabeto; senão, -1;
-	int level = 0; // nível do nó na árvore
-	HFNode left, right;  //referências para os filhos direito e esquerdo: é folha se ambos forem null	
+	int index = -1;  //se folha, guarda posiï¿½ï¿½o no alfabeto; senï¿½o, -1;
+	int level = 0; // nï¿½vel do nï¿½ na ï¿½rvore
+	HFNode left, right;  //referï¿½ncias para os filhos direito e esquerdo: ï¿½ folha se ambos forem null	
 	
 	HFNode (int i, int lv)
 	{
@@ -245,7 +245,7 @@ class HFNode
 	}
 	
 	
-	//verifica se o nó é folha
+	//verifica se o nï¿½ ï¿½ folha
 	boolean isLeaf()
 	{
 		if (left == null && right == null)
