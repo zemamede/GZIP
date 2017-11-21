@@ -2,6 +2,7 @@
 Teoria da Informa��o, LEI, 2006/2007*/
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -22,6 +23,56 @@ public class gzip
 	static RandomAccessFile is;
 	static int rb = 0, availBits = 0;
 
+	public ArrayList<Integer> readDataBlocks(HuffmanTree treeHLIT, HuffmanTree treeHDIST) throws IOException {
+		int position;
+		int []array = {1,2,3,4,5};
+		ArrayList<Integer> result = new ArrayList<>();
+		while(true){
+			//decode literal length
+			String bufferHLIT = "";
+			while((position=treeHLIT.findNode(bufferHLIT,false))<0){
+				bufferHLIT += readBits(1);
+			}
+			if(position<256){
+				result.add(position);
+			}
+			else if(position == 256){
+				break;
+			}
+			else if(position>256) {
+				int length = 0;
+				int backwardDistance=0;
+				if (position < 265) {
+					length= position - 257 + 3;
+				} else if (position == 285) {
+					length = 258;
+				} else if (position > 280 && position < 285) {
+					length = readBits(5) + 131;
+				} else if (position > 276 && position < 281) {
+					length = readBits(4) + 67;
+				} else if (position > 272 && position < 277) {
+					length = readBits(3) + 35;
+				} else if (position > 268 && position < 273) {
+					length = readBits(2) + 19;
+				} else if (position > 264 && position < 269) {
+					length = readBits(1) + 10;
+				}
+
+				//decode distance
+				String bufferHDIST = "";
+				while((position=treeHLIT.findNode(bufferHDIST,false))<0){
+					bufferHDIST+= readBits(1);
+				}
+				if (position<4){
+					backwardDistance = position - 257 + 3;
+				}
+				//move backwards distance bytes in output, copy length bytes from this pos
+
+			}
+		}
+		return  result;
+	}
+
 	public int[] literalsDistanceArray(HuffmanTree tree,int size) throws IOException {
 		int[] array = new int[size];
 
@@ -29,7 +80,6 @@ public class gzip
 		int aux;
 		for (int i = 0; i < array.length;) {
 			String buff = "";
-
 			while((position=tree.findNode(buff,false))<0){
 				buff += readBits(1);
 			}
@@ -222,7 +272,6 @@ public class gzip
 				int[] distanceLength = gz.literalsDistanceArray(codeLengthTree,HDIST+1);
 				gz.huffmanFinal(distanceTree,distanceLength,HDIST,HDIST+1);
 				System.out.println("\n\n#DONE n3#\n\n");
-
 
 				//actualizar numero de blocos analisados
 				numBlocks++;				
