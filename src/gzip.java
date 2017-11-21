@@ -1,6 +1,8 @@
 /* Author: Rui Pedro Paiva
 Teoria da Informa��o, LEI, 2006/2007*/
 
+import javafx.beans.binding.IntegerBinding;
+
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -23,10 +25,10 @@ public class gzip
 	static RandomAccessFile is;
 	static int rb = 0, availBits = 0;
 
-	public ArrayList<Integer> readDataBlocks(HuffmanTree treeHLIT, HuffmanTree treeHDIST) throws IOException {
+	public ArrayList<String> readDataBlocks(HuffmanTree treeHLIT, HuffmanTree treeHDIST) throws IOException {
 		int position;
-		int []array = {1,2,3,4,5};
-		ArrayList<Integer> result = new ArrayList<>();
+		int backwardDistance;
+		ArrayList<String> result = new ArrayList<>();
 		while(true){
 			//decode literal length
 			String bufferHLIT = "";
@@ -34,40 +36,66 @@ public class gzip
 				bufferHLIT += readBits(1);
 			}
 			if(position<256){
-				result.add(position);
+				result.add(position+"");
 			}
 			else if(position == 256){
 				break;
 			}
-			else if(position>256) {
-				int length = 0;
-				int backwardDistance=0;
+			else{
+				int length=0;
 				if (position < 265) {
-					length= position - 257 + 3;
+					length = position - 257 + 3;
 				} else if (position == 285) {
 					length = 258;
-				} else if (position > 280 && position < 285) {
-					length = readBits(5) + 131;
-				} else if (position > 276 && position < 281) {
-					length = readBits(4) + 67;
-				} else if (position > 272 && position < 277) {
-					length = readBits(3) + 35;
-				} else if (position > 268 && position < 273) {
-					length = readBits(2) + 19;
-				} else if (position > 264 && position < 269) {
-					length = readBits(1) + 10;
+				} else{
+					int counter = 0;
+					int h = 1;
+					int lengthE = 11;
+					for(int j=265;j<285;j++){
+						if(counter == 4){
+							counter = 0;
+							h++;
+						}
+						if(position==j){
+							length = readBits(h)+lengthE;
+							break;
+						}else{
+							lengthE +=(int)Math.pow(2,h);
+						}
+						counter++;
+					}
 				}
-
 				//decode distance
 				String bufferHDIST = "";
-				while((position=treeHLIT.findNode(bufferHDIST,false))<0){
+				while((position=treeHDIST.findNode(bufferHDIST,false))<0){
 					bufferHDIST+= readBits(1);
 				}
 				if (position<4){
-					backwardDistance = position - 257 + 3;
+					backwardDistance = position +1;
+					for(int i=0;i<length;i++) {
+						result.add(result.get(result.size() - backwardDistance));
+					}
+				}else{
+					int counter = 0;
+					int h = 1;
+					int dist = 5;
+					for(int j=4;j<30;j++){
+						if(counter == 2){
+							counter = 0;
+							h++;
+						}
+						if(position==j){
+							backwardDistance = readBits(h) + dist;
+							for(int i=0;i<length;i++) {
+							result.add(result.get(result.size()-backwardDistance));
+							}
+							break;
+						}else{
+							dist +=(int)Math.pow(2,h);
+						}
+						counter++;
+					}
 				}
-				//move backwards distance bytes in output, copy length bytes from this pos
-
 			}
 		}
 		return  result;
@@ -199,9 +227,12 @@ public class gzip
 	//fun��o principal, a qual gere todo o processo de descompacta��o
 	public static void main (String args[])
 	{
-
+		HuffmanTree codeLengthTree = new HuffmanTree();
+		HuffmanTree literalTree = new HuffmanTree();
+		HuffmanTree distanceTree = new HuffmanTree();
 		//--- obter ficheiro a descompactar
 		String fileName = "FAQ.txt.gz";
+		String originalFileName = fileName.substring(0,fileName.length()-3);
 		/*if (args.length != 1)
 		{
 			System.out.println("Linha de comando inv�lida!!!");
@@ -251,9 +282,7 @@ public class gzip
                 HCLEN = gz.readBits(4);
 				System.out.println("HCLEN = " + HCLEN);
 
-				HuffmanTree codeLengthTree = new HuffmanTree();
-				HuffmanTree literalTree = new HuffmanTree();
-				HuffmanTree distanceTree = new HuffmanTree();
+
 
 				/*1*/
 				int[] codeLength = new int[19];
@@ -276,8 +305,20 @@ public class gzip
 				//actualizar numero de blocos analisados
 				numBlocks++;				
 			}while(BFINAL == 0);
-						
+			ArrayList <String> outputF;
+			outputF = gz.readDataBlocks(literalTree,distanceTree);
+			byte[] output = new byte[outputF.size()];
+			for(int i=0;i<outputF.size();i++){
+				output[i] = (byte) Integer.parseInt(outputF.get(i));
+			}
+			try{
+				FileOutputStream o = new FileOutputStream(originalFileName);
+				o.write(output);
+				o.close();
+			}catch (Exception e){
 
+			}
+			System.out.println("GZIP decompressed!!");
 			//termina��es			
 			is.close();	
 			System.out.println("End: " + numBlocks + " bloco(s) analisado(s).");
