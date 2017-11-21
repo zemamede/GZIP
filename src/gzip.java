@@ -23,7 +23,7 @@ public class gzip
 	static RandomAccessFile is;
 	static int rb = 0, availBits = 0;
 
-	public ArrayList<String> readDataBlocks(HuffmanTree treeHLIT, HuffmanTree treeHDIST) throws IOException
+	public ArrayList<String> readDataBytes(HuffmanTree treeHLIT, HuffmanTree treeHDIST) throws IOException
 	{
 		int position;
 		int backwardDistance;
@@ -246,17 +246,9 @@ public class gzip
 		HuffmanTree codeLengthTree = new HuffmanTree();
 		HuffmanTree literalTree = new HuffmanTree();
 		HuffmanTree distanceTree = new HuffmanTree();
-		//--- obter ficheiro a descompactar
 		String fileName = "FAQ.txt.gz";
-		String originalFileName = fileName.substring(0,fileName.length()-3);
-		/*if (args.length != 1)
-		{
-			System.out.println("Linha de comando inv�lida!!!");
-			return;
-		}
-		String fileName = args[0];*/			
-				
-		//--- processar ficheiro
+		//String originalFileName = fileName.substring(0,fileName.length()-3); ???
+
 		try
 		{
 			gzip gz = new gzip(fileName);
@@ -265,32 +257,23 @@ public class gzip
 			//ler tamanho do ficheiro original e definir Vector com s�mbolos
 			origFileSize = getOrigFileSize();
 			System.out.println("File size: "+origFileSize);
-			
-			//--- ler cabe�alho
-			int erro = getHeader();
-			if (erro != 0)
+
+			int header = getHeader();
+			if (header != 0)
 			{
-				System.out.println ("Formato inv�lido!!!");
+				System.out.println ("Invalid format !");
 				return;
 			}
-			//else				
-			//	System.out.println(gzh.fName);
-			
-			
-			//--- Para todos os blocos encontrados
+
 			int BFINAL,HLIT,HDIST,HCLEN;
 			
 			do
 			{
-				//--- ler o block header: primeiro byte depois do cabe�alho do ficheiro
 
 				BFINAL = gz.readBits(1); //primeiro bit � o menos significativo
 				System.out.println("BFINAL = " + BFINAL);
-								
-				//analisar block header e ver se � huffman din�mico					
 				if (!isDynamicHuffman(gz.readBits(2))) //ignorar bloco se n�o for Huffman din�mico
 					continue;
-
                 HLIT= gz.readBits(5);
                 System.out.println("HLIT = " + HLIT);
                 HDIST = gz.readBits(5);
@@ -298,51 +281,45 @@ public class gzip
                 HCLEN = gz.readBits(4);
 				System.out.println("HCLEN = " + HCLEN);
 
-
-
 				/*1*/
 				int[] codeLength = new int[19];
 				for(int i=0;i<HCLEN+4;i++){
 					codeLength[i]= gz.readBits(3);
 				}
 				gz.huffmanFinal(codeLengthTree,codeLength,HCLEN,19);
-				//System.out.println("\n\n#DONE n1#\n\n");
-
 				/*2*/
 				int[] literalLength = gz.literalsDistanceArray(codeLengthTree,HLIT+257);
 				gz.huffmanFinal(literalTree,literalLength,HLIT,HLIT+257);
-				//System.out.println("\n\n#DONE n2#\n\n");
-
 				/*3*/
 				int[] distanceLength = gz.literalsDistanceArray(codeLengthTree,HDIST+1);
 				gz.huffmanFinal(distanceTree,distanceLength,HDIST,HDIST+1);
-				//System.out.println("\n\n#DONE n3#\n\n");
 
-				//actualizar numero de blocos analisados
-				numBlocks++;				
+
+				numBlocks++;
+
 			}while(BFINAL == 0);
-			ArrayList <String> outputF;
-			outputF = gz.readDataBlocks(literalTree,distanceTree);
+
+			ArrayList <String> outputF = gz.readDataBytes(literalTree,distanceTree);
 			byte[] output = new byte[outputF.size()];
+
 			for(int i=0;i<outputF.size();i++){
 				output[i] = (byte) Integer.parseInt(outputF.get(i));
 			}
 			try{
-				FileOutputStream o = new FileOutputStream(originalFileName);
+				FileOutputStream o = new FileOutputStream(gzh.fName);
 				o.write(output);
 				o.close();
 			}catch (Exception e){
-
+				System.out.println("Error trying to decompress!");
 			}
-			System.out.println("GZIP decompressed!!");
-			//termina��es			
+			System.out.println(gzh.fName+" decompressed!!");
 			is.close();	
 			System.out.println("End: " + numBlocks + " bloco(s) analisado(s).");
 		}
-		catch (IOException erro)
+		catch (IOException e)
 		{
 			System.out.println("Erro ao usar o ficheiro!!!");
-			System.out.println(erro);
+			System.out.println(e);
 		}
 	}
 
