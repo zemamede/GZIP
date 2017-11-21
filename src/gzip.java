@@ -1,5 +1,3 @@
-/* Author: Rui Pedro Paiva
-Teoria da Informa��o, LEI, 2006/2007*/
 
 import javafx.beans.binding.IntegerBinding;
 
@@ -25,7 +23,8 @@ public class gzip
 	static RandomAccessFile is;
 	static int rb = 0, availBits = 0;
 
-	public ArrayList<String> readDataBlocks(HuffmanTree treeHLIT, HuffmanTree treeHDIST) throws IOException {
+	public ArrayList<String> readDataBlocks(HuffmanTree treeHLIT, HuffmanTree treeHDIST) throws IOException
+	{
 		int position;
 		int backwardDistance;
 		ArrayList<String> result = new ArrayList<>();
@@ -87,7 +86,7 @@ public class gzip
 						if(position==j){
 							backwardDistance = readBits(h) + dist;
 							for(int i=0;i<length;i++) {
-							result.add(result.get(result.size()-backwardDistance));
+								result.add(result.get(result.size()-backwardDistance));
 							}
 							break;
 						}else{
@@ -101,7 +100,8 @@ public class gzip
 		return  result;
 	}
 
-	public int[] literalsDistanceArray(HuffmanTree tree,int size) throws IOException {
+	public int[] literalsDistanceArray(HuffmanTree tree,int size) throws IOException
+	{
 		int[] array = new int[size];
 
 		int position;
@@ -127,11 +127,25 @@ public class gzip
 				i += readBits(7) + 11;
 			}
 		}
-		System.out.println(Arrays.toString(array));
 		return array;
 	}
 
-	public void calcHuffmanInsertTree (HuffmanTree tree, int[] arrayOriginal,int[] arrayNoZeros,int size){
+	public void huffmanFinal(HuffmanTree tree, int[] codeLength,int sizeVar, int sizeTotal)
+	{
+		int[] arrayNoZeros;
+		int[] res;
+		if(codeLength.length==19) {
+			res = orderCodeLength(codeLength, sizeVar);
+		}else{
+			res = codeLength;
+		}
+		arrayNoZeros = removeZerosFromArray(res);
+		calcHuffmanInsertTree(tree,res,arrayNoZeros,sizeTotal);
+
+	}
+
+	public void calcHuffmanInsertTree (HuffmanTree tree, int[] arrayOriginal,int[] arrayNoZeros,int size)
+	{
 		int max;
 		Arrays.sort(arrayNoZeros);
 		max = arrayNoZeros[arrayNoZeros.length-1];
@@ -165,14 +179,14 @@ public class gzip
 			if(arrayOriginal[i]!=0){
 				codeF[i] = nextCode[arrayOriginal[i]-1];
 				string = bits2StringWithSize((byte)codeF[i],arrayOriginal[i]);
-				tree.addNode(string,access[i],true);
+				tree.addNode(string,access[i],false);
 				nextCode[arrayOriginal[i]-1]++;
-				//System.out.println("Inserido o valor: "+string+" com "+codeF[i]+" bits\n");
 			}
 		}
 	}
 
-	public int[] removeZerosFromArray(int []array){
+	public int[] removeZerosFromArray(int []array)
+	{
 		int numZeros = countZerosFromArray(array);
 		int[] result = new int[array.length-numZeros];
 		int j=0;
@@ -185,7 +199,8 @@ public class gzip
 		return  result;
 	}
 
-	public int countZerosFromArray(int[] array){
+	public int countZerosFromArray(int[] array)
+	{
 		int count = 0;
 		for(int i=0;i<array.length;i++){
 			if(array[i]==0){
@@ -195,7 +210,8 @@ public class gzip
 		return count;
 	}
 
-	public int[] orderCodeLength(int[] array, int HCLEN){
+	public int[] orderCodeLength(int[] array, int HCLEN)
+	{
         int[] orderedArray = {16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15};
         int[] result = new int[19];
         for(int i=0;i<result.length;i++){
@@ -210,7 +226,8 @@ public class gzip
         return array;
     }
 
-	public int readBits(int neededBits) throws IOException {
+	public int readBits(int neededBits) throws IOException
+	{
 		int result;
 		int m = (int) Math.pow(2,neededBits)-1;
         while(availBits<neededBits){
@@ -224,7 +241,6 @@ public class gzip
 		return result;
 	}
 
-	//fun��o principal, a qual gere todo o processo de descompacta��o
 	public static void main (String args[])
 	{
 		HuffmanTree codeLengthTree = new HuffmanTree();
@@ -290,17 +306,17 @@ public class gzip
 					codeLength[i]= gz.readBits(3);
 				}
 				gz.huffmanFinal(codeLengthTree,codeLength,HCLEN,19);
-				System.out.println("\n\n#DONE n1#\n\n");
+				//System.out.println("\n\n#DONE n1#\n\n");
 
 				/*2*/
 				int[] literalLength = gz.literalsDistanceArray(codeLengthTree,HLIT+257);
 				gz.huffmanFinal(literalTree,literalLength,HLIT,HLIT+257);
-				System.out.println("\n\n#DONE n2#\n\n");
+				//System.out.println("\n\n#DONE n2#\n\n");
 
 				/*3*/
 				int[] distanceLength = gz.literalsDistanceArray(codeLengthTree,HDIST+1);
 				gz.huffmanFinal(distanceTree,distanceLength,HDIST,HDIST+1);
-				System.out.println("\n\n#DONE n3#\n\n");
+				//System.out.println("\n\n#DONE n3#\n\n");
 
 				//actualizar numero de blocos analisados
 				numBlocks++;				
@@ -330,8 +346,6 @@ public class gzip
 		}
 	}
 
-	
-	//Construtor: recebe nome do ficheiro a descompactar e cria File Streams
 	gzip(String fileName) throws IOException
 	{
 		gzFile = fileName;
@@ -339,21 +353,6 @@ public class gzip
 		fileSize = is.length();
 	}
 
-	public void huffmanFinal(HuffmanTree tree, int[] codeLength,int sizeVar, int sizeTotal){
-		int[] arrayNoZeros;
-		int[] res;
-		if(codeLength.length==19) {
-			res = orderCodeLength(codeLength, sizeVar);
-		}else{
-			res = codeLength;
-		}
-		arrayNoZeros = removeZerosFromArray(res);
-		calcHuffmanInsertTree(tree,res,arrayNoZeros,sizeTotal);
-
-	}
-	
-	
-	//Obt�m tamanho do ficheiro original
 	public static long getOrigFileSize() throws IOException
 	{
 		//salvaguarda posi��o actual do ficheiro
@@ -373,9 +372,7 @@ public class gzip
 		
 		return sz;		
 	}
-		
 
-	//L� o cabe�alho do ficheiro gzip: devolve erro se o formato for inv�lido
 	public static int getHeader() throws IOException  //obt�m cabe�alho
 	{
 		gzh = new gzipHeader();
@@ -385,9 +382,7 @@ public class gzip
 		
 		return 0;
 	}
-		
-	
-	//Analisa block header e v� se � huffman din�mico
+
 	public static boolean isDynamicHuffman(int BTYPE)
 	{
 						
@@ -410,24 +405,9 @@ public class gzip
 			return true;
 		
 	}
-	
-	
-	//Converte um byte para uma string com a sua representa��o bin�ria
-	public static String bits2String(byte b)
-	{
-		String strBits = "";
-		byte mask = 0x01;  //get LSbit
-		
-		for (byte bit, i = 1; i <= 8; i++)
-		{
-			bit = (byte)(b & mask);
-			strBits = bit + strBits; //add bit to the left, since LSb first
-			b >>= 1;
-		}
-		return strBits;		
-	}
 
-	public  static String bits2StringWithSize(byte b, int size){
+	public  static String bits2StringWithSize(byte b, int size)
+	{
 		String strBits = "";
 		byte mask = 0x01;  //get LSbit
 
