@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a3be208a-5e79-4ac9-aea0-4bc858f7b3c6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/FAQ.txt" afterPath="$PROJECT_DIR$/FAQ.txt" />
-      <change beforePath="$PROJECT_DIR$/src/gzip.java" afterPath="$PROJECT_DIR$/src/gzip.java" />
-      <change beforePath="$PROJECT_DIR$/src/gzipHeader.java" afterPath="$PROJECT_DIR$/src/gzipHeader.java" />
-    </list>
+    <list default="true" id="a3be208a-5e79-4ac9-aea0-4bc858f7b3c6" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -264,12 +257,12 @@
       <workItem from="1511192231664" duration="433000" />
       <workItem from="1511297909628" duration="10223000" />
       <workItem from="1511308307151" duration="310000" />
-      <workItem from="1512563793879" duration="473000" />
+      <workItem from="1512563793879" duration="566000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34708000" />
+    <option name="totallyTimeSpent" value="34801000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="23" width="962" height="1059" extended-state="0" />
