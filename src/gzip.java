@@ -22,7 +22,7 @@ public class gzip
 	static int numBlocks = 0;
 	static RandomAccessFile is;
 	static int rb = 0, availBits = 0;
-
+	static ArrayList <String> outputF;
 	public ArrayList<String> readDataBytes(HuffmanTree treeHLIT, HuffmanTree treeHDIST) throws IOException
 	{
 		int position;
@@ -293,13 +293,12 @@ public class gzip
 				/*3*/
 				int[] distanceLength = gz.literalsDistanceArray(codeLengthTree,HDIST+1);
 				gz.huffmanFinal(distanceTree,distanceLength,HDIST,HDIST+1);
-
-
+				outputF = gz.readDataBytes(literalTree,distanceTree);
 				numBlocks++;
 
 			}while(BFINAL == 0);
 
-			ArrayList <String> outputF = gz.readDataBytes(literalTree,distanceTree);
+
 			byte[] output = new byte[outputF.size()];
 
 			for(int i=0;i<outputF.size();i++){

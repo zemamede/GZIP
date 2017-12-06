@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3be208a-5e79-4ac9-aea0-4bc858f7b3c6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gzip.java" afterPath="$PROJECT_DIR$/src/gzip.java" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/FAQ.txt" afterPath="$PROJECT_DIR$/FAQ.txt" />
+      <change beforePath="$PROJECT_DIR$/src/gzip.java" afterPath="$PROJECT_DIR$/src/gzip.java" />
+      <change beforePath="$PROJECT_DIR$/src/gzipHeader.java" afterPath="$PROJECT_DIR$/src/gzipHeader.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,16 +17,18 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="GZIPjava" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="gzip.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gzip.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-459">
-              <caret line="17" column="26" lean-forward="false" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+            <state relative-caret-position="516">
+              <caret line="312" column="13" lean-forward="true" selection-start-line="312" selection-start-column="13" selection-end-line="312" selection-end-column="13" />
               <folding>
                 <element signature="n#!!doc;n#gzip#0" expanded="false" />
-                <element signature="method#readDataBytes#0;class#gzip#0" expanded="false" />
                 <element signature="method#literalsDistanceArray#0;class#gzip#0" expanded="false" />
                 <element signature="method#huffmanFinal#0;class#gzip#0" expanded="false" />
                 <element signature="method#calcHuffmanInsertTree#0;class#gzip#0" expanded="false" />
@@ -30,12 +36,24 @@
                 <element signature="method#countZerosFromArray#0;class#gzip#0" expanded="false" />
                 <element signature="method#orderCodeLength#0;class#gzip#0" expanded="false" />
                 <element signature="method#readBits#0;class#gzip#0" expanded="false" />
-                <element signature="e#6014#6045#0" expanded="false" />
+                <element signature="e#6049#6080#0" expanded="false" />
                 <element signature="method#gzip#0;class#gzip#0" expanded="false" />
                 <element signature="method#getOrigFileSize#0;class#gzip#0" expanded="false" />
                 <element signature="method#getHeader#0;class#gzip#0" expanded="false" />
                 <element signature="method#isDynamicHuffman#0;class#gzip#0" expanded="false" />
                 <element signature="method#bits2StringWithSize#0;class#gzip#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gzipHeader.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gzipHeader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="6" column="36" lean-forward="true" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#2759#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -78,9 +96,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="956" />
-    <option name="width" value="970" />
-    <option name="height" value="1057" />
+    <option name="x" value="-2" />
+    <option name="y" value="23" />
+    <option name="width" value="962" />
+    <option name="height" value="1059" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -125,7 +144,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.gzip">
+  <component name="RunManager">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -147,6 +166,20 @@
       <module name="" />
       <envs />
     </configuration>
+    <configuration name="gzip" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="gzip" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="GZIPjava" />
+      <envs />
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -166,12 +199,6 @@
       </option>
       <envs />
       <patterns />
-    </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
@@ -207,19 +234,11 @@
       <properties />
       <listeners />
     </configuration>
-    <configuration name="gzip" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="gzip" />
-      <option name="VM_PARAMETERS" />
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="GZIPjava" />
-      <envs />
+      <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <recent_temporary>
       <list size="1">
@@ -229,6 +248,9 @@
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -242,26 +264,27 @@
       <workItem from="1511192231664" duration="433000" />
       <workItem from="1511297909628" duration="10223000" />
       <workItem from="1511308307151" duration="310000" />
+      <workItem from="1512563793879" duration="473000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34235000" />
+    <option name="totallyTimeSpent" value="34708000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="956" y="0" width="970" height="1057" extended-state="0" />
+    <frame x="-2" y="23" width="962" height="1059" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32790446" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32740587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17155266" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31380752" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -271,7 +294,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3995657" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -329,7 +352,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc;n#gzip#0" expanded="false" />
-            <element signature="method#readDataBytes#0;class#gzip#0" expanded="false" />
             <element signature="method#literalsDistanceArray#0;class#gzip#0" expanded="false" />
             <element signature="method#huffmanFinal#0;class#gzip#0" expanded="false" />
             <element signature="method#calcHuffmanInsertTree#0;class#gzip#0" expanded="false" />
@@ -337,7 +359,7 @@
             <element signature="method#countZerosFromArray#0;class#gzip#0" expanded="false" />
             <element signature="method#orderCodeLength#0;class#gzip#0" expanded="false" />
             <element signature="method#readBits#0;class#gzip#0" expanded="false" />
-            <element signature="e#6014#6045#0" expanded="false" />
+            <element signature="e#6049#6080#0" expanded="false" />
             <element signature="method#gzip#0;class#gzip#0" expanded="false" />
             <element signature="method#getOrigFileSize#0;class#gzip#0" expanded="false" />
             <element signature="method#getHeader#0;class#gzip#0" expanded="false" />
@@ -353,7 +375,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc;n#gzip#0" expanded="false" />
-            <element signature="method#readDataBytes#0;class#gzip#0" expanded="false" />
             <element signature="method#literalsDistanceArray#0;class#gzip#0" expanded="false" />
             <element signature="method#huffmanFinal#0;class#gzip#0" expanded="false" />
             <element signature="method#calcHuffmanInsertTree#0;class#gzip#0" expanded="false" />
@@ -361,7 +382,7 @@
             <element signature="method#countZerosFromArray#0;class#gzip#0" expanded="false" />
             <element signature="method#orderCodeLength#0;class#gzip#0" expanded="false" />
             <element signature="method#readBits#0;class#gzip#0" expanded="false" />
-            <element signature="e#6014#6045#0" expanded="false" />
+            <element signature="e#6049#6080#0" expanded="false" />
             <element signature="method#gzip#0;class#gzip#0" expanded="false" />
             <element signature="method#getOrigFileSize#0;class#gzip#0" expanded="false" />
             <element signature="method#getHeader#0;class#gzip#0" expanded="false" />
@@ -377,7 +398,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc;n#gzip#0" expanded="false" />
-            <element signature="method#readDataBytes#0;class#gzip#0" expanded="false" />
             <element signature="method#literalsDistanceArray#0;class#gzip#0" expanded="false" />
             <element signature="method#huffmanFinal#0;class#gzip#0" expanded="false" />
             <element signature="method#calcHuffmanInsertTree#0;class#gzip#0" expanded="false" />
@@ -385,7 +405,30 @@
             <element signature="method#countZerosFromArray#0;class#gzip#0" expanded="false" />
             <element signature="method#orderCodeLength#0;class#gzip#0" expanded="false" />
             <element signature="method#readBits#0;class#gzip#0" expanded="false" />
-            <element signature="e#6014#6045#0" expanded="false" />
+            <element signature="e#6049#6080#0" expanded="false" />
+            <element signature="method#gzip#0;class#gzip#0" expanded="false" />
+            <element signature="method#getOrigFileSize#0;class#gzip#0" expanded="false" />
+            <element signature="method#getHeader#0;class#gzip#0" expanded="false" />
+            <element signature="method#isDynamicHuffman#0;class#gzip#0" expanded="false" />
+            <element signature="method#bits2StringWithSize#0;class#gzip#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gzip.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc;n#gzip#0" expanded="false" />
+            <element signature="method#literalsDistanceArray#0;class#gzip#0" expanded="false" />
+            <element signature="method#huffmanFinal#0;class#gzip#0" expanded="false" />
+            <element signature="method#calcHuffmanInsertTree#0;class#gzip#0" expanded="false" />
+            <element signature="method#removeZerosFromArray#0;class#gzip#0" expanded="false" />
+            <element signature="method#countZerosFromArray#0;class#gzip#0" expanded="false" />
+            <element signature="method#orderCodeLength#0;class#gzip#0" expanded="false" />
+            <element signature="method#readBits#0;class#gzip#0" expanded="false" />
+            <element signature="e#6049#6080#0" expanded="false" />
             <element signature="method#gzip#0;class#gzip#0" expanded="false" />
             <element signature="method#getOrigFileSize#0;class#gzip#0" expanded="false" />
             <element signature="method#getHeader#0;class#gzip#0" expanded="false" />
@@ -408,7 +451,6 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc;n#gzip#0" expanded="false" />
-            <element signature="method#readDataBytes#0;class#gzip#0" expanded="false" />
             <element signature="method#literalsDistanceArray#0;class#gzip#0" expanded="false" />
             <element signature="method#huffmanFinal#0;class#gzip#0" expanded="false" />
             <element signature="method#calcHuffmanInsertTree#0;class#gzip#0" expanded="false" />
@@ -416,7 +458,7 @@
             <element signature="method#countZerosFromArray#0;class#gzip#0" expanded="false" />
             <element signature="method#orderCodeLength#0;class#gzip#0" expanded="false" />
             <element signature="method#readBits#0;class#gzip#0" expanded="false" />
-            <element signature="e#6014#6045#0" expanded="false" />
+            <element signature="e#6049#6080#0" expanded="false" />
             <element signature="method#gzip#0;class#gzip#0" expanded="false" />
             <element signature="method#getOrigFileSize#0;class#gzip#0" expanded="false" />
             <element signature="method#getHeader#0;class#gzip#0" expanded="false" />
@@ -440,13 +482,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/TesteHuffmanTree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="27" lean-forward="false" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gzipHeader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="36" lean-forward="true" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#2759#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/gzip.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-459">
-          <caret line="17" column="26" lean-forward="false" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+        <state relative-caret-position="516">
+          <caret line="312" column="13" lean-forward="true" selection-start-line="312" selection-start-column="13" selection-end-line="312" selection-end-column="13" />
           <folding>
             <element signature="n#!!doc;n#gzip#0" expanded="false" />
-            <element signature="method#readDataBytes#0;class#gzip#0" expanded="false" />
             <element signature="method#literalsDistanceArray#0;class#gzip#0" expanded="false" />
             <element signature="method#huffmanFinal#0;class#gzip#0" expanded="false" />
             <element signature="method#calcHuffmanInsertTree#0;class#gzip#0" expanded="false" />
@@ -454,7 +513,7 @@
             <element signature="method#countZerosFromArray#0;class#gzip#0" expanded="false" />
             <element signature="method#orderCodeLength#0;class#gzip#0" expanded="false" />
             <element signature="method#readBits#0;class#gzip#0" expanded="false" />
-            <element signature="e#6014#6045#0" expanded="false" />
+            <element signature="e#6049#6080#0" expanded="false" />
             <element signature="method#gzip#0;class#gzip#0" expanded="false" />
             <element signature="method#getOrigFileSize#0;class#gzip#0" expanded="false" />
             <element signature="method#getHeader#0;class#gzip#0" expanded="false" />

@@ -1,10 +1,10 @@
 /* Author: Rui Pedro Paiva
-Teoria da Informação, LEI, 2006/2007*/
+Teoria da Informaï¿½ï¿½o, LEI, 2006/2007*/
 
 import java.io.*;
 
-//classe com os campos referentes ao cabeçalho de um ficheiro gzip
-//uma só função para ler o cabeçalho
+//classe com os campos referentes ao cabeï¿½alho de um ficheiro gzip
+//uma sï¿½ funï¿½ï¿½o para ler o cabeï¿½alho
 public class gzipHeader {
 	//elementos fixos
 	byte ID1, ID2, CM, FLG, XFL, OS;
@@ -30,19 +30,19 @@ public class gzipHeader {
 		
 		
 	
-	// ler cabeçalho: devolve -1 se erro, erro se ok	
+	// ler cabeï¿½alho: devolve -1 se erro, erro se ok	
 	int read(RandomAccessFile is) throws IOException
 	{
-		//Identicação 1 e 2: valores fixos
+		//Identicaï¿½ï¿½o 1 e 2: valores fixos
 		ID1 = is.readByte();  
-		if (ID1 != 0x1f) return -1; //erro no cabeçalho
+		if (ID1 != 0x1f) return -1; //erro no cabeï¿½alho
 			
 		ID2 = is.readByte();
-		if (ID2 != (byte)(0x8b)) return -1; //erro no cabeçalho
+		if (ID2 != (byte)(0x8b)) return -1; //erro no cabeï¿½alho
 		
-		//Método de compressão (deve ser 8 para denotar o deflate)
+		//Mï¿½todo de compressï¿½o (deve ser 8 para denotar o deflate)
 		CM = is.readByte();  		
-		if (CM != 0x08) return -1; //erro no cabeçalho
+		if (CM != 0x08) return -1; //erro no cabeï¿½alho
 					
 		//Flags
 		FLG = is.readByte();
@@ -73,7 +73,7 @@ public class gzipHeader {
 		if (FLG_FEXTRA == 1)
 		{
 			//ler 2 bytes XLEN + XLEN bytes de extra field
-			//1º byte: LSB, 2º: MSB
+			//1ï¿½ byte: LSB, 2ï¿½: MSB
 			XLEN = new byte[lenXLEN];
 			XLEN[0] = is.readByte();
 			XLEN[1] = is.readByte();
@@ -81,7 +81,7 @@ public class gzipHeader {
 			
 			extraField = new byte[xlen];
 			
-			//ler extra field (deixado como está, i.e., não processado...)
+			//ler extra field (deixado como estï¿½, i.e., nï¿½o processado...)
 			for (int i = 0; i <= xlen - 1; i++)
 				extraField[i] = is.readByte();
 		}
