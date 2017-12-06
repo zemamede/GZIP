@@ -1,18 +1,12 @@
 
-import javafx.beans.binding.IntegerBinding;
+
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
-//class principal para leitura de um ficheiro gzip
-//M�todos:
-//gzip(String fileName) throws IOException --> construtor
-//int getHeader() throws IOException --> l� o cabe�alho do ficheiro para um objecto da class gzipHeader
-//void closeFiles() throws IOException --> fecha os ficheiros
-//String bits2String(byte b) --> converte um byte para uma string com a sua representa��o bin�ria
+
+
 public class gzip
 {
 	static gzipHeader gzh;
@@ -22,12 +16,11 @@ public class gzip
 	static int numBlocks = 0;
 	static RandomAccessFile is;
 	static int rb = 0, availBits = 0;
-	static ArrayList <String> outputF;
-	public ArrayList<String> readDataBytes(HuffmanTree treeHLIT, HuffmanTree treeHDIST) throws IOException
+	static ArrayList <String> outputF = new ArrayList<>();
+	public void readDataBytes(HuffmanTree treeHLIT, HuffmanTree treeHDIST) throws IOException
 	{
 		int position;
 		int backwardDistance;
-		ArrayList<String> result = new ArrayList<>();
 		while(true){
 			//decode literal length
 			String bufferHLIT = "";
@@ -35,7 +28,7 @@ public class gzip
 				bufferHLIT += readBits(1);
 			}
 			if(position<256){
-				result.add(position+"");
+				outputF.add(position+"");
 			}
 			else if(position == 256){
 				break;
@@ -72,7 +65,7 @@ public class gzip
 				if (position<4){
 					backwardDistance = position +1;
 					for(int i=0;i<length;i++) {
-						result.add(result.get(result.size() - backwardDistance));
+						outputF.add(outputF.get(outputF.size() - backwardDistance));
 					}
 				}else{
 					int counter = 0;
@@ -86,7 +79,7 @@ public class gzip
 						if(position==j){
 							backwardDistance = readBits(h) + dist;
 							for(int i=0;i<length;i++) {
-								result.add(result.get(result.size()-backwardDistance));
+								outputF.add(outputF.get(outputF.size()-backwardDistance));
 							}
 							break;
 						}else{
@@ -97,7 +90,6 @@ public class gzip
 				}
 			}
 		}
-		return  result;
 	}
 
 	public int[] literalsDistanceArray(HuffmanTree tree,int size) throws IOException
@@ -247,14 +239,10 @@ public class gzip
 		HuffmanTree literalTree = new HuffmanTree();
 		HuffmanTree distanceTree = new HuffmanTree();
 		String fileName = "FAQ.txt.gz";
-		//String originalFileName = fileName.substring(0,fileName.length()-3); ???
 
 		try
 		{
 			gzip gz = new gzip(fileName);
-			//System.out.println(fileSize);
-			
-			//ler tamanho do ficheiro original e definir Vector com s�mbolos
 			origFileSize = getOrigFileSize();
 			System.out.println("File size: "+origFileSize);
 
@@ -269,10 +257,9 @@ public class gzip
 			
 			do
 			{
-
-				BFINAL = gz.readBits(1); //primeiro bit � o menos significativo
+				BFINAL = gz.readBits(1);
 				System.out.println("BFINAL = " + BFINAL);
-				if (!isDynamicHuffman(gz.readBits(2))) //ignorar bloco se n�o for Huffman din�mico
+				if (!isDynamicHuffman(gz.readBits(2)))
 					continue;
                 HLIT= gz.readBits(5);
                 System.out.println("HLIT = " + HLIT);
@@ -281,26 +268,25 @@ public class gzip
                 HCLEN = gz.readBits(4);
 				System.out.println("HCLEN = " + HCLEN);
 
-				/*1*/
+				/*Tree 1*/
 				int[] codeLength = new int[19];
 				for(int i=0;i<HCLEN+4;i++){
 					codeLength[i]= gz.readBits(3);
 				}
 				gz.huffmanFinal(codeLengthTree,codeLength,HCLEN,19);
-				/*2*/
+				/*Tree 2*/
 				int[] literalLength = gz.literalsDistanceArray(codeLengthTree,HLIT+257);
 				gz.huffmanFinal(literalTree,literalLength,HLIT,HLIT+257);
-				/*3*/
+				/*Tree 3*/
 				int[] distanceLength = gz.literalsDistanceArray(codeLengthTree,HDIST+1);
 				gz.huffmanFinal(distanceTree,distanceLength,HDIST,HDIST+1);
-				outputF = gz.readDataBytes(literalTree,distanceTree);
+				gz.readDataBytes(literalTree,distanceTree);
 				numBlocks++;
 
 			}while(BFINAL == 0);
 
 
 			byte[] output = new byte[outputF.size()];
-
 			for(int i=0;i<outputF.size();i++){
 				output[i] = (byte) Integer.parseInt(outputF.get(i));
 			}
@@ -331,30 +317,22 @@ public class gzip
 
 	public static long getOrigFileSize() throws IOException
 	{
-		//salvaguarda posi��o actual do ficheiro
 		long fp = is.getFilePointer();
-		
-		//�ltimos 4 bytes = ISIZE;
 		is.seek(fileSize-4);
-		
-		//determina ISIZE (s� correcto se cabe em 32 bits)
 		long sz = 0;
 		sz = is.readUnsignedByte();
 		for (int i = 0; i <= 2; i++)
-			sz = (is.readUnsignedByte() << 8*(i+1)) + sz;			
-		
-		//restaura file pointer
+			sz = (is.readUnsignedByte() << 8*(i+1)) + sz;
 		is.seek(fp);
-		
 		return sz;		
 	}
 
-	public static int getHeader() throws IOException  //obt�m cabe�alho
+	public static int getHeader() throws IOException
 	{
 		gzh = new gzipHeader();
 		
 		int erro = gzh.read(is);
-		if (erro != 0) return erro; //formato inv�lido		
+		if (erro != 0) return erro;
 		
 		return 0;
 	}
@@ -362,7 +340,7 @@ public class gzip
 	public static boolean isDynamicHuffman(int BTYPE)
 	{
 						
-		if (BTYPE == 0) //--> sem compress�o
+		if (BTYPE == 0)
 		{
 			System.out.println("Ignorando bloco: sem compacta��o!!!");
 			return false;
@@ -385,12 +363,11 @@ public class gzip
 	public  static String bits2StringWithSize(byte b, int size)
 	{
 		String strBits = "";
-		byte mask = 0x01;  //get LSbit
-
+		byte mask = 0x01;
 		for (byte bit, i = 1; i <= size; i++)
 		{
 			bit = (byte)(b & mask);
-			strBits = bit + strBits; //add bit to the left, since LSb first
+			strBits = bit + strBits;
 			b >>= 1;
 		}
 		return strBits;
