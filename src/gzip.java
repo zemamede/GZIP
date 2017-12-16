@@ -281,22 +281,25 @@ public class gzip
 				int[] distanceLength = gz.literalsDistanceArray(codeLengthTree,HDIST+1);
 				gz.huffmanFinal(distanceTree,distanceLength,HDIST,HDIST+1);
 				gz.readDataBytes(literalTree,distanceTree);
+
+				byte[] output = new byte[outputF.size()];
+				for(int i=0;i<outputF.size();i++){
+					output[i] = (byte) Integer.parseInt(outputF.get(i));
+				}
+				try{
+					FileOutputStream o = new FileOutputStream(gzh.fName);
+					o.write(output);
+					o.close();
+				}catch (Exception e){
+					System.out.println("Error trying to decompress!");
+				}
+
 				numBlocks++;
 
 			}while(BFINAL == 0);
 
 
-			byte[] output = new byte[outputF.size()];
-			for(int i=0;i<outputF.size();i++){
-				output[i] = (byte) Integer.parseInt(outputF.get(i));
-			}
-			try{
-				FileOutputStream o = new FileOutputStream(gzh.fName);
-				o.write(output);
-				o.close();
-			}catch (Exception e){
-				System.out.println("Error trying to decompress!");
-			}
+
 			System.out.println(gzh.fName+" decompressed!!");
 			is.close();	
 			System.out.println("End: " + numBlocks + " bloco(s) analisado(s).");
